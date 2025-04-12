@@ -1,16 +1,20 @@
 {
-  "name": "collab-drawing-app",
+  "name": "socketio-chat",
   "version": "1.0.0",
-  "description": "A collaborative drawing and text input app",
+  "description": "A simple chat application using Socket.IO",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+  "keywords": [
+    "chat",
+    "socket.io",
+    "express"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^4.5.0"
-  },
-  "engines": {
-    "node": "16.x"
+    "socket.io": "^4.0.0"
   }
 }

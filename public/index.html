@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textfeld Beispiel</title>
-    <link rel="stylesheet" href="style.css">
+    <title>WebSocket Chat</title>
+    <style>
+        #messages {
+            border: 1px solid #ccc;
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+        }
+        #textbox {
+            width: 80%;
+        }
+    </style>
 </head>
 <body>
-    <h1>Gemeinsames Textfeld</h1>
-    <form>
-        <label for="textbox">Gib etwas Text ein:</label>
-        <input type="text" id="textbox" name="textbox">
-    </form>
-
+    <h1>WebSocket Chat</h1>
+    <div id="messages"></div> <!-- New div for displaying messages -->
+    <input type="text" id="textbox" placeholder="Type your message here..." />
+    
+    <script src="/socket.io/socket.io.js"></script>
     <script src="canvas.js"></script>
 </body>
 </html>

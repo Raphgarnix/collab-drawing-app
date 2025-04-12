@@ -1,9 +1,13 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
+const cors = require('cors'); // Optional: for CORS handling
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+// Optional: Enable CORS
+app.use(cors());
 
 // Stellt die 'public'-Dateien zur Verfügung (HTML, CSS, JS)
 app.use(express.static('public'));
@@ -26,6 +30,10 @@ io.on('connection', (socket) => {
 
 // Server läuft auf dem angegebenen Port (3000)
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT}`);
+server.listen(PORT, (err) => {
+  if (err) {
+    console.error('Fehler beim Starten des Servers:', err);
+  } else {
+    console.log(`Server läuft auf Port ${PORT}`);
+  }
 });
