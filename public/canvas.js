@@ -3,6 +3,7 @@ const socket = io();  // Establish connection to the server
 const textbox = document.getElementById('textbox');
 const messagesDiv = document.getElementById('messages'); // Div for displaying messages
 const sendbutton = document.getElementById('sendbutton');
+let currentUsers = [];
 
 // Function to send text to the server
 function sendText() {
@@ -36,4 +37,47 @@ function addMessageToChat(message) {
   messageElement.textContent = message; // Create a new div for the message
   messagesDiv.appendChild(messageElement); // Append it to the messages div
   messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
+}
+
+function addDynamicTab(userName) {
+  const dynamicTabs = document.getElementById('dynamic-tabs');
+
+   // Erstellen des neuen Tabs
+   const newTab = document.createElement('label');
+   newTab.className = 'tab';
+   newTab.innerText = userName;
+
+  // Erstellen des Schließen-Buttons
+  const closeButton = document.createElement('span');  // Ein 'span' für den Schließen-Button
+  closeButton.className = 'closebutton';
+  closeButton.innerText = '✕';  // Das Symbol für den Schließen-Button
+
+  closeButton.onclick = function(event) {
+      event.stopPropagation();  // Verhindert das Auslösen des Tab-Öffnungs-Events
+      dynamicTabs.removeChild(newTab);  // Entfernt den Tab aus dem DOM
+  };
+  
+  // Hinzufügen des Schließen-Buttons zum Tab
+  newTab.appendChild(closeButton);
+  
+  // Hinzufügen des neuen Tabs zur Tabs-Leiste
+  dynamicTabs.appendChild(newTab);
+}
+
+// Function to add a user to the current users list
+function addUser (userName) {
+  if (!currentUsers.includes(userName)) {
+    currentUsers.push(userName);
+    addDynamicTab(userName); // Call the function to add a tab for the new user
+  }
+}
+
+// Function to remove a user from the current users list
+function removeUser (userName) {
+  const index = currentUsers.indexOf(userName);
+  if (index > -1) {
+    currentUsers.splice(index, 1);
+    // Optionally, you can also remove the tab here if needed
+    // You might want to implement a way to find and remove the tab
+  }
 }
