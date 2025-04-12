@@ -1,16 +1,13 @@
-const socket = io();  // Mit dem Server verbinden
+const socket = io();  // Verbindung zum Server herstellen
 
-// Holen des Textfelds
 const textbox = document.getElementById('textbox');
 
-// Wenn der Benutzer Text im Textfeld eingibt, sende den Text an den Server
-textbox.addEventListener('input', () => {
-  const text = textbox.value;
-  socket.emit('text', text);  // Sende den aktuellen Text an den Server
+// Bei jeder Eingabe wird der Text an den Server gesendet
+textbox.addEventListener('input', (event) => {
+  socket.emit('text', { text: event.target.value });  // Text an Server senden
 });
 
-// Empfange den Text von anderen Benutzern und setze ihn im Textfeld
+// Empfang von Textänderungen von anderen Benutzern
 socket.on('text', (data) => {
-  // Den Text in das Textfeld setzen
-  textbox.value = data;
+  textbox.value = data.text;  // Das Textfeld mit dem empfangenen Text aktualisieren
 });
