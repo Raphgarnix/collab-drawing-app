@@ -2,11 +2,27 @@ const socket = io();  // Establish connection to the server
 
 const textbox = document.getElementById('textbox');
 const messagesDiv = document.getElementById('messages'); // Div for displaying messages
+const sendbutton = document.getElementById('sendbutton');
 
-// Send text to the server when the user types in the textbox
-textbox.addEventListener('input', (event) => {
-  const text = event.target.value;
-  socket.emit('text', { text });  // Send text to the server
+// Function to send text to the server
+function sendText() {
+  const text = textbox.value.trim(); // Get the text from the textbox
+  if (text) { // Check if the textbox is not empty
+    socket.emit('text', { text });  // Send text to the server
+    addMessageToChat(text); // Add the message to the chat display immediately
+    textbox.value = ''; // Clear the textbox after sending
+  }
+}
+
+// Send text when the send button is clicked
+sendbutton.addEventListener('click', sendText);
+
+// Send text when the Enter key is pressed
+textbox.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Prevent the default action (like form submission)
+    sendText(); // Call the sendText function
+  }
 });
 
 // Receive text from other users

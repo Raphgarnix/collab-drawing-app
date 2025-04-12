@@ -4,22 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket Chat</title>
-    <style>
-        #messages {
-            border: 1px solid #ccc;
-            height: 300px;
-            overflow-y: scroll;
-            margin-bottom: 10px;
-        }
-        #textbox {
-            width: 80%;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>WebSocket Chat</h1>
-    <div id="messages"></div> <!-- New div for displaying messages -->
-    <input type="text" id="textbox" placeholder="Type your message here..." />
+    <nav></nav>
+    <div class="MainSideWindow">
+        <aside>
+            <hr>
+            <div class="dynamic-tabs" id="dynamic-tabs">
+                <!-- Dynamische Tabs werden hier hinzugefügt -->
+            </div>
+        </aside>
+        <main id="main-content">
+            <table>
+                <tr>    
+                    <td> 
+                        <h1>Willkommen</h1>                    
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <p>write a message to others all over the world</p>
+            <div id="messages"></div>
+            <hr>
+            <div class="textboxHolder">
+                <input type="text" id="textbox" placeholder="Type your message here..." />
+                <button id="sendbutton">Send</button>
+            </div>
+            
+        </main>
+        
+        
+    </div>
     
     <script src="/socket.io/socket.io.js"></script>
     <script src="canvas.js"></script>
