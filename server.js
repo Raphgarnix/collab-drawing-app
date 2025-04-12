@@ -9,7 +9,7 @@ const io = new Server(server);
 // Optional: Enable CORS
 app.use(cors());
 
-// Stellt die 'public'-Dateien zur Verfügung (HTML, CSS, JS)
+// Serve static files from the 'public' directory (HTML, CSS, JS)
 app.use(express.static('public'));
 
 // Array to hold active users
@@ -22,10 +22,18 @@ io.on('connection', (socket) => {
   socket.on('registerUser ', (username) => {
     if (!activeUsers.includes(username)) {
       activeUsers.push(username);
+      socket.username = username; // Set the username on the socket
       console.log('Active users:', activeUsers);
       // Emit the updated user list to all clients
       io.emit('userList', activeUsers);
     }
+  });
+
+  // When text is received from the client
+  socket.on('text', (data) => {
+    console.log('Text received:', data.text);
+    // Send the text to all other users
+    socket.broadcast.emit('text', data);
   });
 
   // When the user disconnects
@@ -39,19 +47,12 @@ io.on('connection', (socket) => {
   });
 });
 
-  // Wenn Text vom Client empfangen wird
-  socket.on('text', (data) => {
-    console.log('Text empfangen:', data.text);
-    // Den Text an alle anderen Benutzer senden
-    socket.broadcast.emit('text', data);
-  });
-
-// Server läuft auf dem angegebenen Port (3000)
+// Server runs on the specified port (3000)
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, (err) => {
   if (err) {
-    console.error('Fehler beim Starten des Servers:', err);
+    console.error('Error starting the server:', err);
   } else {
-    console.log(`Server läuft auf Port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
   }
 });
