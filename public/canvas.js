@@ -39,28 +39,30 @@ function addMessageToChat(message) {
   messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
 }
 
+// Function to add a dynamic tab for a user
 function addDynamicTab(userName) {
   const dynamicTabs = document.getElementById('dynamic-tabs');
 
-   // Erstellen des neuen Tabs
-   const newTab = document.createElement('label');
-   newTab.className = 'tab';
-   newTab.innerText = userName;
+  // Create the new tab
+  const newTab = document.createElement('label');
+  newTab.className = 'tab';
+  newTab.innerText = userName;
 
-  // Erstellen des Schließen-Buttons
-  const closeButton = document.createElement('span');  // Ein 'span' für den Schließen-Button
+  // Create the close button
+  const closeButton = document.createElement('span');  // A 'span' for the close button
   closeButton.className = 'closebutton';
-  closeButton.innerText = '✕';  // Das Symbol für den Schließen-Button
+  closeButton.innerText = '✕';  // The symbol for the close button
 
   closeButton.onclick = function(event) {
-      event.stopPropagation();  // Verhindert das Auslösen des Tab-Öffnungs-Events
-      dynamicTabs.removeChild(newTab);  // Entfernt den Tab aus dem DOM
+      event.stopPropagation();  // Prevent triggering the tab opening event
+      dynamicTabs.removeChild(newTab);  // Remove the tab from the DOM
+      removeUser (userName); // Remove the user from the current users list
   };
   
-  // Hinzufügen des Schließen-Buttons zum Tab
+  // Add the close button to the tab
   newTab.appendChild(closeButton);
   
-  // Hinzufügen des neuen Tabs zur Tabs-Leiste
+  // Add the new tab to the tabs bar
   dynamicTabs.appendChild(newTab);
 }
 
@@ -81,3 +83,20 @@ function removeUser (userName) {
     // You might want to implement a way to find and remove the tab
   }
 }
+
+// Listen for the updated user list from the server
+socket.on('userList', (users) => {
+  // Clear current users and tabs
+  currentUsers = [];
+  const dynamicTabs = document.getElementById('dynamic-tabs');
+  dynamicTabs.innerHTML = ''; // Clear existing tabs
+
+  // Add each user to the current users list and create a tab
+  users.forEach(user => {
+    addUser (user);
+  });
+});
+
+// Register the user with their username
+const username = prompt("Please enter your username:");
+socket.emit('registerUser ', username); // Register the user with the server
