@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Systemsteuerung</title>
+    <title>Canvas Example</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <div class="newsoundbutton" onclick="newSound()">New</div>
-        <div class="refreshbutton" onclick="refresh()">Refresh</div>
-        <div class="closebutton" onclick="closeWindow()">Schließen</div>
-    </nav>
-    <div class="picture">
-        <img src="C:/Users/rapha/Desktop/APP/WindowsFormsApp1/HTML/Screenshot_20220726-234249_WhatsApp.jpg" 
-             alt="Bild" 
-             id="mainImage" 
-             onclick="playSound()">
-    </div>
+    <h1>Canvas and Text Box Example</h1>
+    <form>
+        <label for="textbox">Enter some text:</label>
+        <input type="text" id="textbox" name="textbox">
+    </form>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
 
     <script src="canvas.js"></script>
 </body>
