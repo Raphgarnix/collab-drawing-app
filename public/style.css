@@ -229,3 +229,42 @@ main {
 table {
     width: 100%; /* Tabelle nimmt die volle Breite ein */
 }
+
+@media (max-width: 768px) {
+    /* Seitenleiste ausblenden oder schmal machen */
+    aside {
+      display: none;
+    }
+  
+    .MainSideWindow {
+      flex-direction: column;
+      margin-top: 70px;
+    }
+  
+    main {
+      padding: 10px;
+    }
+  
+    #textbox {
+      width: 100%;
+    }
+  
+    .tab {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .closebutton {
+      top: 5%;
+      padding: 3px 8px;
+      font-size: 9px;
+    }
+  
+    nav {
+      flex-direction: column;
+      height: auto;
+      padding: 10px;
+      text-align: center;
+    }
+  }
+  
