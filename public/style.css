@@ -42,7 +42,7 @@ aside#sidePanel {
 #main-content {
     flex-grow: 1;
     transition: margin-left 0.3s ease;
-    margin-left: 200px;
+    margin-left: 10px;
 }
 
 .MainSideWindow.collapsed aside#sidePanel {
