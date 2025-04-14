@@ -8,12 +8,14 @@ const sendbutton = document.getElementById('sendbutton');
 let currentUsers = [];
 
 
-const toggleBtn = document.getElementById('toggleAsideBtn');
-const sidePanel = document.getElementById('sidePanel');
+    const toggleBtn = document.getElementById('toggleAsideBtn');
+    const container = document.querySelector('.MainSideWindow');
 
-toggleBtn.addEventListener('click', () => {
-    sidePanel.classList.toggle('closed');
-});
+    toggleBtn.addEventListener('click', () => {
+        container.classList.toggle('collapsed');
+    });
+
+
 
 // Function to send text to the server
 function sendText() {

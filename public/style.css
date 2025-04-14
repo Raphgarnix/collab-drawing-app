@@ -33,23 +33,25 @@ aside#sidePanel {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    top: 70px;
-    position: fixed;
-    left: 0;
     height: 100vh;
     overflow: hidden;
     transition: width 0.3s ease;
-}
-
-aside#sidePanel.closed + #main-content {
-    width: 0;
-    padding: 10px 0; /* keeps vertical padding when closed */
+    /* position: fixed;  ← entferne das */
 }
 
 #main-content {
     flex-grow: 1;
     transition: margin-left 0.3s ease;
     margin-left: 200px;
+}
+
+.MainSideWindow.collapsed aside#sidePanel {
+    width: 0;
+    padding: 10px 0;
+}
+
+.MainSideWindow.collapsed #main-content {
+    margin-left: 0;
 }
 
 
