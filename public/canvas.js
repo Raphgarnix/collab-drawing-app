@@ -1,9 +1,19 @@
 const socket = io();  // Establish connection to the server
 
+
+
 const textbox = document.getElementById('textbox');
 const messagesDiv = document.getElementById('messages'); // Div for displaying messages
 const sendbutton = document.getElementById('sendbutton');
 let currentUsers = [];
+
+
+const toggleBtn = document.getElementById('toggleAsideBtn');
+const sidePanel = document.getElementById('sidePanel');
+
+toggleBtn.addEventListener('click', () => {
+    sidePanel.classList.toggle('closed');
+});
 
 // Function to send text to the server
 function sendText() {
@@ -100,3 +110,8 @@ socket.on('userList', (users) => {
 // Register the user with their username
 const username = prompt("Please enter your username:");
 socket.emit('registerUser ', username); // Register the user with the server
+
+
+
+
+

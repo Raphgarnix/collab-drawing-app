@@ -19,14 +19,33 @@ h1, h2 {
     margin-top: 70px; /* Platz unter der fixierten Navigationsleiste */
 }
 
-aside {
+#toggleAsideBtn {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    z-index: 1000;
+    padding: 5px 10px;
+}
+
+aside#sidePanel {
     background-color: #f4f4f4;
     width: 200px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     top: 70px;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    overflow: hidden;
+    transition: width 0.3s ease;
 }
+
+aside#sidePanel.closed {
+    width: 0;
+    padding: 10px 0; /* keeps vertical padding when closed */
+}
+
 
 #messages {
     border: 1px solid #ccc;
@@ -228,5 +247,9 @@ main {
 
 table {
     width: 100%; /* Tabelle nimmt die volle Breite ein */
+}
+
+.onlineSight {
+    text-align: center;
 }
   
