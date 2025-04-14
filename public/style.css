@@ -41,9 +41,15 @@ aside#sidePanel {
     transition: width 0.3s ease;
 }
 
-aside#sidePanel.closed {
+aside#sidePanel.closed + #main-content {
     width: 0;
     padding: 10px 0; /* keeps vertical padding when closed */
+}
+
+#main-content {
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+    margin-left: 200px;
 }
 
 
