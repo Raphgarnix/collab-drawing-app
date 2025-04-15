@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
   console.log('A user has connected.');
 
   // When a user registers with their username
-  socket.on('registerUser', (username) => {
+  socket.on('registerUser ', (username) => {
     if (!activeUsers.includes(username)) {
       activeUsers.push(username);
       socket.username = username; // Set the username on the socket
