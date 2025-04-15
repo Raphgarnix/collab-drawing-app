@@ -109,16 +109,8 @@ socket.on('userList', (users) => {
   });
 });
 
-let username = '';
-
-while (!username || username.trim() === '') {
-    username = prompt("Please enter your username:");
-    if (!username || username.trim() === '') {
-        alert("Username cannot be empty. Please enter a valid username.");
-    }
-}
-
 // Register the user with their username
+const username = prompt("Please enter your username:");
 socket.emit('registerUser ', username); // Register the user with the server
 
 
