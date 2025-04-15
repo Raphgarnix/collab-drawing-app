@@ -19,15 +19,20 @@ io.on('connection', (socket) => {
   console.log('A user has connected.');
 
   // When a user registers with their username
-  socket.on('registerUser ', (username) => {
+  socket.on('registerUser', (username) => {
+    if (!username || username.trim() === '') {
+      console.log('❌ Empty or invalid username received. Ignored.');
+      return;
+    }
+  
     if (!activeUsers.includes(username)) {
       activeUsers.push(username);
-      socket.username = username; // Set the username on the socket
-      console.log('Active users:', activeUsers);
-      // Emit the updated user list to all clients
+      socket.username = username;
+      console.log('✅ Active users:', activeUsers);
       io.emit('userList', activeUsers);
     }
   });
+  
 
   // When text is received from the client
   socket.on('text', (data) => {

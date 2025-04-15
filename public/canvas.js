@@ -1,6 +1,12 @@
 const socket = io();  // Establish connection to the server
 
+var amountOfUser = 0;
 
+const userOnline = document.getElementById('amountOnline');
+
+function updateUsersOnline(){
+  userOnline.textContent = ' Online right now: ' + amountOfUser;
+}
 
 const textbox = document.getElementById('textbox');
 const messagesDiv = document.getElementById('messages'); // Div for displaying messages
@@ -83,6 +89,8 @@ function addUser (userName) {
   if (!currentUsers.includes(userName)) {
     currentUsers.push(userName);
     addDynamicTab(userName); // Call the function to add a tab for the new user
+    amountOfUser += 1;
+    updateUsersOnline();
   }
 }
 
@@ -94,6 +102,8 @@ function removeUser (userName) {
     // Optionally, you can also remove the tab here if needed
     // You might want to implement a way to find and remove the tab
   }
+  amountOfUser -= 1;
+  updateUsersOnline();
 }
 
 // Listen for the updated user list from the server
@@ -109,8 +119,16 @@ socket.on('userList', (users) => {
   });
 });
 
+let username = '';
+
+while (!username || username.trim() === '') {
+    username = prompt("Please enter your username:");
+    if (!username || username.trim() === '') {
+        alert("Username cannot be empty. Please enter a valid username.");
+    }
+}
+
 // Register the user with their username
-const username = prompt("Please enter your username:");
 socket.emit('registerUser ', username); // Register the user with the server
 
 
