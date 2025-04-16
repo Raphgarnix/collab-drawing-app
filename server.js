@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
       socket.username = username; // Set the username on the socket
       console.log('Active users:', activeUsers);
       // Emit the updated user list to all clients
-      io.emit('userList', activeUsers);
+      updateUserList();
     }
   });
 
@@ -43,9 +43,21 @@ io.on('connection', (socket) => {
     activeUsers = activeUsers.filter(user => user !== socket.username);
     console.log('Active users:', activeUsers);
     // Emit the updated user list to all clients
-    io.emit('userList', activeUsers);
+    updateUserList();
   });
+
+    // Auf Anfrage die User-Anzahl senden
+  socket.on('getUserCount', () => {
+    socket.emit('userCount', activeUsers.length);
+  });
+
 });
+
+function updateUserList() {
+  io.emit('userList', activeUsers);
+  io.emit('userCount', activeUsers.length);
+}
+
 
 // Server runs on the specified port (3000)
 const PORT = process.env.PORT || 3000;

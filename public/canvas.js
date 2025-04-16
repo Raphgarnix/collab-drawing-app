@@ -97,5 +97,12 @@ socket.on('text', (data) => {
   addMessageToChat(data.text);  // Add received text to chat
 });
 
+// Wenn Anzahl empfangen wird:
+socket.on('userCount', (count) => {
+  console.log('Aktive Nutzer:', count);
+  document.getElementById('userCountDisplay').innerText = `Online: ${count}`;
+});
 
 socket.emit('registerUser ', username); // Register the user with the server
+
+socket.emit('getUserCount');
