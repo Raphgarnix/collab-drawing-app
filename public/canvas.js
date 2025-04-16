@@ -57,19 +57,11 @@ function addDynamicTab(userName) {
   newTab.className = 'tab';
   newTab.innerText = userName;
 
-  // Create the close button
-  const closeButton = document.createElement('span');  // A 'span' for the close button
-  closeButton.className = 'closebutton';
-  closeButton.innerText = '✕';  // The symbol for the close button
-
   closeButton.onclick = function(event) {
       event.stopPropagation();  // Prevent triggering the tab opening event
       dynamicTabs.removeChild(newTab);  // Remove the tab from the DOM
       removeUser (userName); // Remove the user from the current users list
   };
-  
-  // Add the close button to the tab
-  newTab.appendChild(closeButton);
   
   // Add the new tab to the tabs bar
   dynamicTabs.appendChild(newTab);
