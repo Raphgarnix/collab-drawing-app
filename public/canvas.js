@@ -56,12 +56,6 @@ function addDynamicTab(userName) {
   const newTab = document.createElement('label');
   newTab.className = 'tab';
   newTab.innerText = userName;
-
-  closeButton.onclick = function(event) {
-      event.stopPropagation();  // Prevent triggering the tab opening event
-      dynamicTabs.removeChild(newTab);  // Remove the tab from the DOM
-      removeUser (userName); // Remove the user from the current users list
-  };
   
   // Add the new tab to the tabs bar
   dynamicTabs.appendChild(newTab);
