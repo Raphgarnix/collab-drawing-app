@@ -34,7 +34,6 @@ aside#sidePanel {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    flex-shrink: 0;
     height: 100vh;
     overflow: hidden;
     transition: width 0.3s ease;
