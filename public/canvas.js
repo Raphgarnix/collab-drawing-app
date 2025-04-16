@@ -5,15 +5,28 @@ const socket = io();  // Establish connection to the server
 const textbox = document.getElementById('textbox');
 const messagesDiv = document.getElementById('messages'); // Div for displaying messages
 const sendbutton = document.getElementById('sendbutton');
+const toggleBtn = document.getElementById('toggleAsideBtn');
+const container = document.querySelector('.MainSideWindow');
+const username = prompt("Please enter your username:");
 let currentUsers = [];
 
 
-    const toggleBtn = document.getElementById('toggleAsideBtn');
-    const container = document.querySelector('.MainSideWindow');
 
-    toggleBtn.addEventListener('click', () => {
-        container.classList.toggle('collapsed');
-    });
+
+toggleBtn.addEventListener('click', () => {
+    container.classList.toggle('collapsed');
+});
+
+// Send text when the Enter key is pressed
+textbox.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Prevent the default action (like form submission)
+    sendText(); // Call the sendText function
+  }
+});
+
+// Send text when the send button is clicked
+sendbutton.addEventListener('click', sendText);
 
 
 
@@ -26,22 +39,6 @@ function sendText() {
     textbox.value = ''; // Clear the textbox after sending
   }
 }
-
-// Send text when the send button is clicked
-sendbutton.addEventListener('click', sendText);
-
-// Send text when the Enter key is pressed
-textbox.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    event.preventDefault(); // Prevent the default action (like form submission)
-    sendText(); // Call the sendText function
-  }
-});
-
-// Receive text from other users
-socket.on('text', (data) => {
-  addMessageToChat(data.text);  // Add received text to chat
-});
 
 // Function to add message to chat display
 function addMessageToChat(message) {
@@ -109,11 +106,10 @@ socket.on('userList', (users) => {
   });
 });
 
-// Register the user with their username
-const username = prompt("Please enter your username:");
+// Receive text from other users
+socket.on('text', (data) => {
+  addMessageToChat(data.text);  // Add received text to chat
+});
+
+
 socket.emit('registerUser ', username); // Register the user with the server
-
-
-
-
-
