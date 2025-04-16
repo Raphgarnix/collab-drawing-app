@@ -33,10 +33,12 @@ aside#sidePanel {
     padding: 10px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     height: 100vh;
     overflow: hidden;
     transition: width 0.3s ease;
-    /* position: fixed;  ← entferne das */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); /* Schatten rechts */
+
 }
 
 #main-content {
@@ -221,5 +223,6 @@ table {
 
 .userCountDisplay {
     text-align: center;
+    flex-shrink: 0;
 }
   
