@@ -103,6 +103,13 @@ socket.on('userCount', (count) => {
   document.getElementById('userCountDisplay').innerText = `Online: ${count}`;
 });
 
+while (!username || username.trim() === '') {
+  username = prompt("Please enter your username:");
+  if (!username || username.trim() === '') {
+      alert("Username cannot be empty. Please enter a valid username.");
+  }
+}
+
 socket.emit('registerUser ', username); // Register the user with the server
 
 socket.emit('getUserCount');
