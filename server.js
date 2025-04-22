@@ -27,6 +27,9 @@ io.on('connection', (socket) => {
       // Emit the updated user list to all clients
       updateUserList();
     }
+    else if (activeUsers.includes(username)) {
+      socket.emit('sameName', username);
+    }
   });
 
   // When text is received from the client
